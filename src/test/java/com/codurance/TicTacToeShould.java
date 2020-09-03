@@ -39,13 +39,13 @@ public class TicTacToeShould {
 
   @Test
   public void givenFirstTurnWhenNextPlayerThenX() {
-    assertEquals('X', ticTacToe.nextPlayer());
+    assertEquals('X', ticTacToe.nextPlayer().mark);
   }
 
   @Test
   public void givenLastTurnWasXWhenNextPlayerThenO() {
     ticTacToe.play(1, 1);
-    assertEquals('O', ticTacToe.nextPlayer());
+    assertEquals('O', ticTacToe.nextPlayer().mark);
   }
 
   @Test

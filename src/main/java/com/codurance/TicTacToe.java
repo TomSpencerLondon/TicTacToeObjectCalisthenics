@@ -2,8 +2,13 @@ package com.codurance;
 
 public class TicTacToe {
 
-  private Character[][] board = {{'\0', '\0', '\0'}, {'\0', '\0', '\0'}, {'\0', '\0', '\0'}};
-  private char lastPlayer = '\0';
+  private Marker[][] board = {
+      {new Marker('\0'), new Marker('\0'), new Marker('\0')},
+      {new Marker('\0'), new Marker('\0'), new Marker('\0')},
+      {new Marker('\0'), new Marker('\0'), new Marker('\0')}
+  };
+
+  private Marker lastPlayer = new Marker('\0');
   private static final int SIZE = 3;
 
   public String play(int x, int y) {
@@ -16,7 +21,7 @@ public class TicTacToe {
 
   private String determineResult(int x, int y) {
     if (isWin(x, y)) {
-      return lastPlayer + " is the winner";
+      return lastPlayer.mark + " is the winner";
     } else if (isDraw()) {
       return "The result is draw";
     } else {
@@ -24,11 +29,11 @@ public class TicTacToe {
     }
   }
 
-  public char nextPlayer() {
-    if (lastPlayer == 'X') {
-      return 'O';
+  public Marker nextPlayer() {
+    if (lastPlayer.equals(new Marker('X'))) {
+      return new Marker('O');
     }
-    return 'X';
+    return new Marker('X');
   }
 
   private void checkAxis(int axis) {
@@ -37,8 +42,8 @@ public class TicTacToe {
     }
   }
 
-  private void setBox(int x, int y, char lastPlayer) {
-    if (board[x - 1][y - 1] != '\0') {
+  private void setBox(int x, int y, Marker lastPlayer) {
+    if (!board[x - 1][y - 1].isEmpty()) {
       throw new RuntimeException("Box is occupied");
     }
 
@@ -46,14 +51,14 @@ public class TicTacToe {
   }
 
   private boolean isWin(int x, int y) {
-    int playerTotal = lastPlayer * SIZE;
+    int playerTotal = lastPlayer.mark * SIZE;
     char horizontal, vertical, diagonal1, diagonal2;
     horizontal = vertical = diagonal1 = diagonal2 = '\0';
     for (int i = 0; i < SIZE; i++) {
-      horizontal += board[i][y - 1];
-      vertical += board[x - 1][i];
-      diagonal1 += board[i][i];
-      diagonal2 += board[i][SIZE - i - 1];
+      horizontal += board[i][y - 1].mark;
+      vertical += board[x - 1][i].mark;
+      diagonal1 += board[i][i].mark;
+      diagonal2 += board[i][SIZE - i - 1].mark;
     }
     if (horizontal == playerTotal
         || vertical == playerTotal
@@ -67,7 +72,7 @@ public class TicTacToe {
   private boolean isDraw() {
     for (int x = 0; x < SIZE; x++) {
       for (int y = 0; y < SIZE; y++) {
-        if (board[x][y] == '\0') {
+        if (board[x][y].isEmpty()) {
           return false;
         }
       }
