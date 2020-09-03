@@ -13,7 +13,8 @@ public class Marker {
     return mark == '\0';
   }
 
-  public boolean equals(Marker other) {
-    return this.mark == other.mark;
+  @Override
+  public boolean equals(Object other) {
+    return ((Marker) other).mark == this.mark;
   }
 }

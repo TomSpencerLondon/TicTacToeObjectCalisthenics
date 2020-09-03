@@ -1,5 +1,8 @@
 package com.codurance;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class WinningCombination {
   private static final int SIZE = 3;
 

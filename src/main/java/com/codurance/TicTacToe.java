@@ -1,7 +1,8 @@
 package com.codurance;
 
 public class TicTacToe {
-  private WinningCombination combination = new WinningCombination(new Marker[][]{
+  private WinningCombination combination = new WinningCombination(
+      new Marker[][]{
       {new Marker('\0'), new Marker('\0'), new Marker('\0')},
       {new Marker('\0'), new Marker('\0'), new Marker('\0')},
       {new Marker('\0'), new Marker('\0'), new Marker('\0')}
@@ -19,7 +20,7 @@ public class TicTacToe {
   }
 
   private String determineResult(int x, int y) {
-    if (isWin(x, y)) {
+    if (combination.isWin(lastPlayer, x, y)) {
       return lastPlayer.mark + " is the winner";
     } else if (isDraw()) {
       return "The result is draw";
@@ -47,10 +48,6 @@ public class TicTacToe {
     }
 
     combination.add(x, y, lastPlayer);
-  }
-
-  private boolean isWin(int x, int y) {
-    return combination.isWin(lastPlayer, x, y);
   }
 
   private boolean isDraw() {
