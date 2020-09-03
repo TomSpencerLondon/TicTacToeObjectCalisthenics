@@ -11,6 +11,10 @@ public class TicTacToe {
     checkAxis(y);
     lastPlayer = nextPlayer();
     setBox(x, y, lastPlayer);
+    return determineResult(x, y);
+  }
+
+  private String determineResult(int x, int y) {
     if (isWin(x, y)) {
       return lastPlayer + " is the winner";
     } else if (isDraw()) {
