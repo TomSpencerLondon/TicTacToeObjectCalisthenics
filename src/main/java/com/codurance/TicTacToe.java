@@ -1,14 +1,11 @@
 package com.codurance;
 
 public class TicTacToe {
-
-  private Marker[][] board = {
+  private WinningCombination combination = new WinningCombination(new Marker[][]{
       {new Marker('\0'), new Marker('\0'), new Marker('\0')},
       {new Marker('\0'), new Marker('\0'), new Marker('\0')},
       {new Marker('\0'), new Marker('\0'), new Marker('\0')}
-  };
-
-  private WinningCombination combination = new WinningCombination(board);
+  });
 
   private Marker lastPlayer = new Marker('\0');
   private static final int SIZE = 3;
