@@ -40,9 +40,9 @@ public class TicTacToe {
   private void setBox(int x, int y, char lastPlayer) {
     if (board[x - 1][y - 1] != '\0') {
       throw new RuntimeException("Box is occupied");
-    } else {
-      board[x - 1][y - 1] = lastPlayer;
     }
+
+    board[x - 1][y - 1] = lastPlayer;
   }
 
   private boolean isWin(int x, int y) {
