@@ -8,6 +8,8 @@ public class TicTacToe {
       {new Marker('\0'), new Marker('\0'), new Marker('\0')}
   };
 
+  private WinningCombination combination = new WinningCombination(board);
+
   private Marker lastPlayer = new Marker('\0');
   private static final int SIZE = 3;
 
@@ -43,36 +45,21 @@ public class TicTacToe {
   }
 
   private void setBox(int x, int y, Marker lastPlayer) {
-    if (!board[x - 1][y - 1].isEmpty()) {
+    if (!combination.isEmpty(x - 1, y - 1)){
       throw new RuntimeException("Box is occupied");
     }
 
-    board[x - 1][y - 1] = lastPlayer;
+    combination.add(x, y, lastPlayer);
   }
 
   private boolean isWin(int x, int y) {
-    int playerTotal = lastPlayer.mark * SIZE;
-    char horizontal, vertical, diagonal1, diagonal2;
-    horizontal = vertical = diagonal1 = diagonal2 = '\0';
-    for (int i = 0; i < SIZE; i++) {
-      horizontal += board[i][y - 1].mark;
-      vertical += board[x - 1][i].mark;
-      diagonal1 += board[i][i].mark;
-      diagonal2 += board[i][SIZE - i - 1].mark;
-    }
-    if (horizontal == playerTotal
-        || vertical == playerTotal
-        || diagonal1 == playerTotal
-        || diagonal2 == playerTotal) {
-      return true;
-    }
-    return false;
+    return combination.isWin(lastPlayer, x, y);
   }
 
   private boolean isDraw() {
     for (int x = 0; x < SIZE; x++) {
       for (int y = 0; y < SIZE; y++) {
-        if (board[x][y].isEmpty()) {
+        if (combination.isEmpty(x, y)) {
           return false;
         }
       }
