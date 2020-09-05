@@ -48,11 +48,24 @@ public class TicTacToe {
       diagonal1 += board.getMarkAt(i, i);
       diagonal2 += board.getMarkAt(i, SIZE - i - 1);
     }
-    return horizontal == playerTotal
-        || vertical == playerTotal
-        || diagonal1 == playerTotal
-        || diagonal2 == playerTotal;
+    return isWinHorizontal(playerTotal, horizontal)
+        || isWinVertical(playerTotal, vertical)
+        || isWinDiagonal(playerTotal, diagonal1)
+        || isWinDiagonal(playerTotal, diagonal2);
   }
+
+  private boolean isWinDiagonal(int playerTotal, char diagonal1) {
+    return diagonal1 == playerTotal;
+  }
+
+  private boolean isWinVertical(int playerTotal, char vertical) {
+    return vertical == playerTotal;
+  }
+
+  private boolean isWinHorizontal(int playerTotal, char horizontal) {
+    return horizontal == playerTotal;
+  }
+
   boolean isDraw() {
     for (int x = 0; x < SIZE; x++) {
       for (int y = 0; y < SIZE; y++) {
