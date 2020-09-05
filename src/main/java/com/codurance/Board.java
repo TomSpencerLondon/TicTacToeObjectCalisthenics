@@ -51,4 +51,10 @@ public class Board {
     }
     return true;
   }
+
+  void checkAxis(int axis) {
+    if (axis < 1 || axis > SIZE) {
+      throw new RuntimeException("X is outside board");
+    }
+  }
 }

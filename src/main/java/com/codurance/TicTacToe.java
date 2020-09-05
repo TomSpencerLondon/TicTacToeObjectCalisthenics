@@ -7,8 +7,8 @@ public class TicTacToe {
   private static final int SIZE = 3;
 
   public String play(int x, int y) {
-    checkAxis(x);
-    checkAxis(y);
+    board.checkAxis(x);
+    board.checkAxis(y);
     lastPlayer = nextPlayer();
     setBox(x, y, lastPlayer);
     return determineResult(x, y);
@@ -29,12 +29,6 @@ public class TicTacToe {
       return new Marker('O');
     }
     return new Marker('X');
-  }
-
-  private void checkAxis(int axis) {
-    if (axis < 1 || axis > SIZE) {
-      throw new RuntimeException("X is outside board");
-    }
   }
 
   private void setBox(int x, int y, Marker lastPlayer) {
