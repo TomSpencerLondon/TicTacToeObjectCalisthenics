@@ -14,10 +14,15 @@ public class Board {
   }
 
   public void add(int x, int y, Marker lastPlayer){
+    if (!isEmpty(x - 1, y - 1)){
+      throw new RuntimeException("Box is occupied");
+    }
     board[x - 1][y - 1] = lastPlayer;
   }
 
   public boolean isEmpty(int x, int y) {
+    checkAxis(x);
+    checkAxis(y);
     return board[x][y].isEmpty();
   }
 
@@ -52,8 +57,8 @@ public class Board {
     return true;
   }
 
-  void checkAxis(int axis) {
-    if (axis < 1 || axis > SIZE) {
+  private void checkAxis(int axis) {
+    if (axis < 0 || axis >= SIZE) {
       throw new RuntimeException("X is outside board");
     }
   }

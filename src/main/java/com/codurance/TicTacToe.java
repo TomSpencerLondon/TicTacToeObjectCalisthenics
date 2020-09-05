@@ -7,8 +7,6 @@ public class TicTacToe {
   private static final int SIZE = 3;
 
   public String play(int x, int y) {
-    board.checkAxis(x);
-    board.checkAxis(y);
     lastPlayer = nextPlayer();
     setBox(x, y, lastPlayer);
     return determineResult(x, y);
@@ -32,10 +30,6 @@ public class TicTacToe {
   }
 
   private void setBox(int x, int y, Marker lastPlayer) {
-    if (!board.isEmpty(x - 1, y - 1)){
-      throw new RuntimeException("Box is occupied");
-    }
-
     board.add(x, y, lastPlayer);
   }
 
