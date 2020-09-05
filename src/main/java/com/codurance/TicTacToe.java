@@ -1,10 +1,11 @@
 package com.codurance;
 
 public class TicTacToe {
+
+  private static final int SIZE = 3;
   private Board board = new Board();
 
   private Marker lastPlayer = new Marker('\0');
-  private static final int SIZE = 3;
 
   public String play(int x, int y) {
     lastPlayer = nextPlayer();
@@ -13,7 +14,7 @@ public class TicTacToe {
   }
 
   private String determineResult(int x, int y) {
-    if (board.isWin(lastPlayer, x, y)) {
+    if (isWin(lastPlayer, x, y)) {
       return lastPlayer.mark + " is the winner";
     } else if (board.isDraw()) {
       return "The result is draw";
@@ -33,4 +34,23 @@ public class TicTacToe {
     board.add(x, y, lastPlayer);
   }
 
+  public boolean isWin(Marker lastPlayer, int x, int y) {
+    int playerTotal = lastPlayer.mark * SIZE;
+
+    char horizontal = '\0';
+    char vertical = '\0';
+    char diagonal1 = '\0';
+    char diagonal2 = '\0';
+
+    for (int i = 0; i < SIZE; i++) {
+      horizontal += board.getMarkAt(i, y - 1);
+      vertical += board.getMarkAt(x - 1, i);
+      diagonal1 += board.getMarkAt(i, i);
+      diagonal2 += board.getMarkAt(i, SIZE - i - 1);
+    }
+    return horizontal == playerTotal
+        || vertical == playerTotal
+        || diagonal1 == playerTotal
+        || diagonal2 == playerTotal;
+  }
 }

@@ -26,24 +26,8 @@ public class Board {
     return board[x][y].isEmpty();
   }
 
-  public boolean isWin(Marker lastPlayer, int x, int y) {
-    int playerTotal = lastPlayer.mark * SIZE;
-
-    char horizontal = '\0';
-    char vertical = '\0';
-    char diagonal1 = '\0';
-    char diagonal2 = '\0';
-
-    for (int i = 0; i < SIZE; i++) {
-      horizontal += board[i][y - 1].mark;
-      vertical += board[x - 1][i].mark;
-      diagonal1 += board[i][i].mark;
-      diagonal2 += board[i][SIZE - i - 1].mark;
-    }
-    return horizontal == playerTotal
-        || vertical == playerTotal
-        || diagonal1 == playerTotal
-        || diagonal2 == playerTotal;
+  public char getMarkAt(int x, int y){
+    return board[x][y].mark;
   }
 
   boolean isDraw() {
