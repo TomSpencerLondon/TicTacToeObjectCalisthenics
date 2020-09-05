@@ -43,10 +43,10 @@ public class TicTacToe {
     char diagonal2 = '\0';
 
     for (int i = 0; i < SIZE; i++) {
-      horizontal += board.getMarkAt(i, y - 1);
-      vertical += board.getMarkAt(x - 1, i);
-      diagonal1 += board.getMarkAt(i, i);
-      diagonal2 += board.getMarkAt(i, SIZE - i - 1);
+      horizontal += board.getMarkAt(new Position(i, y - 1));
+      vertical += board.getMarkAt(new Position(x - 1, i));
+      diagonal1 += board.getMarkAt(new Position(i, i));
+      diagonal2 += board.getMarkAt(new Position(i, SIZE - i - 1));
     }
     return isWinHorizontal(playerTotal, horizontal)
         || isWinVertical(playerTotal, vertical)

@@ -26,8 +26,8 @@ public class Board {
     return board[x][y].isEmpty();
   }
 
-  public char getMarkAt(int x, int y){
-    return board[x][y].mark;
+  public char getMarkAt(Position position){
+    return board[position.getX()][position.getY()].mark;
   }
 
   private void checkAxis(int axis) {
