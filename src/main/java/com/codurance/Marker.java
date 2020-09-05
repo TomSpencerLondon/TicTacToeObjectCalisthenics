@@ -5,6 +5,10 @@ public class Marker {
 
   public final Character mark;
 
+  public Marker(){
+    this('\0');
+  }
+
   public Marker(Character mark) {
     this.mark = mark;
   }

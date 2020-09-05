@@ -7,9 +7,9 @@ public class Board {
 
   public Board() {
     this.board = new Marker[][]{
-        {new Marker('\0'), new Marker('\0'), new Marker('\0')},
-        {new Marker('\0'), new Marker('\0'), new Marker('\0')},
-        {new Marker('\0'), new Marker('\0'), new Marker('\0')}
+        {new Marker(), new Marker(), new Marker()},
+        {new Marker(), new Marker(), new Marker()},
+        {new Marker(), new Marker(), new Marker()}
     };
   }
 
