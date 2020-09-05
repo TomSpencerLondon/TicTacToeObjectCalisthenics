@@ -5,8 +5,12 @@ public class Board {
 
   private Marker[][] board;
 
-  public Board(Marker[][] board) {
-    this.board = board;
+  public Board() {
+    this.board = new Marker[][]{
+        {new Marker('\0'), new Marker('\0'), new Marker('\0')},
+        {new Marker('\0'), new Marker('\0'), new Marker('\0')},
+        {new Marker('\0'), new Marker('\0'), new Marker('\0')}
+    };
   }
 
   public void add(int x, int y, Marker lastPlayer){
