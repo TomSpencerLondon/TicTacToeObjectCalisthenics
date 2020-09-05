@@ -30,17 +30,6 @@ public class Board {
     return board[x][y].mark;
   }
 
-  boolean isDraw() {
-    for (int x = 0; x < SIZE; x++) {
-      for (int y = 0; y < SIZE; y++) {
-        if (isEmpty(x, y)) {
-          return false;
-        }
-      }
-    }
-    return true;
-  }
-
   private void checkAxis(int axis) {
     if (axis < 0 || axis >= SIZE) {
       throw new RuntimeException("X is outside board");

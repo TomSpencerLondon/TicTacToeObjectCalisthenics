@@ -16,7 +16,7 @@ public class TicTacToe {
   private String determineResult(int x, int y) {
     if (isWin(lastPlayer, x, y)) {
       return lastPlayer.mark + " is the winner";
-    } else if (board.isDraw()) {
+    } else if (isDraw()) {
       return "The result is draw";
     } else {
       return "No winner";
@@ -52,5 +52,15 @@ public class TicTacToe {
         || vertical == playerTotal
         || diagonal1 == playerTotal
         || diagonal2 == playerTotal;
+  }
+  boolean isDraw() {
+    for (int x = 0; x < SIZE; x++) {
+      for (int y = 0; y < SIZE; y++) {
+        if (board.isEmpty(x, y)) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
 }
