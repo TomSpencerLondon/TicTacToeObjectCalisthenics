@@ -15,6 +15,8 @@ public class Marker {
 
   @Override
   public boolean equals(Object other) {
+    if (!(other instanceof Marker))
+      return false;
     return ((Marker) other).mark == this.mark;
   }
 }

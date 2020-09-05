@@ -1,14 +1,11 @@
 package com.codurance;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class WinningCombination {
+public class Board {
   private static final int SIZE = 3;
 
   private Marker[][] board;
 
-  public WinningCombination(Marker[][] board) {
+  public Board(Marker[][] board) {
     this.board = board;
   }
 
@@ -22,20 +19,32 @@ public class WinningCombination {
 
   public boolean isWin(Marker lastPlayer, int x, int y) {
     int playerTotal = lastPlayer.mark * SIZE;
-    char horizontal, vertical, diagonal1, diagonal2;
-    horizontal = vertical = diagonal1 = diagonal2 = '\0';
+
+    char horizontal = '\0';
+    char vertical = '\0';
+    char diagonal1 = '\0';
+    char diagonal2 = '\0';
+
     for (int i = 0; i < SIZE; i++) {
       horizontal += board[i][y - 1].mark;
       vertical += board[x - 1][i].mark;
       diagonal1 += board[i][i].mark;
       diagonal2 += board[i][SIZE - i - 1].mark;
     }
-    if (horizontal == playerTotal
+    return horizontal == playerTotal
         || vertical == playerTotal
         || diagonal1 == playerTotal
-        || diagonal2 == playerTotal) {
-      return true;
+        || diagonal2 == playerTotal;
+  }
+
+  boolean isDraw() {
+    for (int x = 0; x < SIZE; x++) {
+      for (int y = 0; y < SIZE; y++) {
+        if (isEmpty(x, y)) {
+          return false;
+        }
+      }
     }
-    return false;
+    return true;
   }
 }

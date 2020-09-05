@@ -1,7 +1,7 @@
 package com.codurance;
 
 public class TicTacToe {
-  private WinningCombination combination = new WinningCombination(
+  private Board board = new Board(
       new Marker[][]{
       {new Marker('\0'), new Marker('\0'), new Marker('\0')},
       {new Marker('\0'), new Marker('\0'), new Marker('\0')},
@@ -20,9 +20,9 @@ public class TicTacToe {
   }
 
   private String determineResult(int x, int y) {
-    if (combination.isWin(lastPlayer, x, y)) {
+    if (board.isWin(lastPlayer, x, y)) {
       return lastPlayer.mark + " is the winner";
-    } else if (isDraw()) {
+    } else if (board.isDraw()) {
       return "The result is draw";
     } else {
       return "No winner";
@@ -43,21 +43,11 @@ public class TicTacToe {
   }
 
   private void setBox(int x, int y, Marker lastPlayer) {
-    if (!combination.isEmpty(x - 1, y - 1)){
+    if (!board.isEmpty(x - 1, y - 1)){
       throw new RuntimeException("Box is occupied");
     }
 
-    combination.add(x, y, lastPlayer);
+    board.add(x, y, lastPlayer);
   }
 
-  private boolean isDraw() {
-    for (int x = 0; x < SIZE; x++) {
-      for (int y = 0; y < SIZE; y++) {
-        if (combination.isEmpty(x, y)) {
-          return false;
-        }
-      }
-    }
-    return true;
-  }
 }
