@@ -31,6 +31,9 @@ public class TicTacToe {
     checkAxis(y);
     Position position = new Position(x, y);
     lastPlayer = nextPlayer();
+    if (playerX.contains(position) || playerO.contains(position)){
+      throw new RuntimeException("Box is occupied");
+    }
     setBox(position, lastPlayer);
     return determineResult(position);
   }
@@ -59,7 +62,7 @@ public class TicTacToe {
       playerO.add(position);
     }
 
-    board.add(position.getX(), position.getY(), lastPlayer);
+//    board.add(position.getX(), position.getY(), lastPlayer);
   }
 
   public boolean isWin(Marker lastPlayer) {
