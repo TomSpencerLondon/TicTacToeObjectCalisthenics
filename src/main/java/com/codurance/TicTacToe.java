@@ -10,11 +10,11 @@ public class TicTacToe {
   public String play(int x, int y) {
     lastPlayer = nextPlayer();
     setBox(x, y, lastPlayer);
-    return determineResult(x, y);
+    return determineResult(new Position(x, y));
   }
 
-  private String determineResult(int x, int y) {
-    if (isWin(lastPlayer, x, y)) {
+  private String determineResult(Position position) {
+    if (isWin(lastPlayer, position)) {
       return lastPlayer.mark + " is the winner";
     } else if (isDraw()) {
       return "The result is draw";
@@ -31,11 +31,14 @@ public class TicTacToe {
   }
 
   private void setBox(int x, int y, Marker lastPlayer) {
+
     board.add(x, y, lastPlayer);
   }
 
-  public boolean isWin(Marker lastPlayer, int x, int y) {
+  public boolean isWin(Marker lastPlayer, Position position) {
     int playerTotal = lastPlayer.mark * SIZE;
+    int x = position.getX();
+    int y = position.getY();
 
     char horizontal = '\0';
     char vertical = '\0';
@@ -43,10 +46,10 @@ public class TicTacToe {
     char diagonal2 = '\0';
 
     for (int i = 0; i < SIZE; i++) {
-      horizontal += board.getMarkAt(new Position(i, y - 1));
-      vertical += board.getMarkAt(new Position(x - 1, i));
-      diagonal1 += board.getMarkAt(new Position(i, i));
-      diagonal2 += board.getMarkAt(new Position(i, SIZE - i - 1));
+      horizontal += board.getMarkAt(position.newPosition(i, y - 1));
+      vertical += board.getMarkAt(position.newPosition(x - 1, i));
+      diagonal1 += board.getMarkAt(position.newPosition(i, i));
+      diagonal2 += board.getMarkAt(position.newPosition(i, SIZE - i - 1));
     }
     return isWinHorizontal(playerTotal, horizontal)
         || isWinVertical(playerTotal, vertical)
