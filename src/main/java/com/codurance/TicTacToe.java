@@ -19,7 +19,6 @@ public class TicTacToe {
       );
   private static final int SIZE = 3;
   public static final int TOTAL_SQUARES = 9;
-  private Board board = new Board();
 
   private Marker lastPlayer = new Marker('\0');
   List<Position> playerX = new ArrayList<>();

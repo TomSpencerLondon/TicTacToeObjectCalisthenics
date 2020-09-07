@@ -13,18 +13,6 @@ public class Position {
     this.y = y;
   }
 
-  public int getX() {
-    return x;
-  }
-
-  public int getY() {
-    return y;
-  }
-
-  public Position newPosition(int x, int y){
-    return new Position(x, y);
-  }
-
   @Override
   public boolean equals(Object other) {
     return reflectionEquals(this, other);
