@@ -63,9 +63,9 @@ public class TicTacToe {
   }
 
   public boolean isWin(Marker lastPlayer) {
-    if (lastPlayer.mark == 'X'){
+    if (lastPlayer.equals(new Marker('X'))){
       return WINNING_COMBINATIONS.stream().anyMatch(playerX::containsAll);
-    }else if(lastPlayer.mark == 'O'){
+    }else if(lastPlayer.equals(new Marker('O'))){
       return WINNING_COMBINATIONS.stream().anyMatch(playerO::containsAll);
     }else {
       return false;
