@@ -1,5 +1,8 @@
 package com.codurance;
 
+import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
+import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
+
 public class Position {
 
   private final int x;
@@ -20,5 +23,15 @@ public class Position {
 
   public Position newPosition(int x, int y){
     return new Position(x, y);
+  }
+
+  @Override
+  public boolean equals(Object other) {
+    return reflectionEquals(this, other);
+  }
+
+  @Override
+  public int hashCode() {
+    return reflectionHashCode(this);
   }
 }
