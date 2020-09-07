@@ -1,16 +1,36 @@
 package com.codurance;
 
-public class TicTacToe {
+import static java.util.Arrays.asList;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class TicTacToe {
+  private static final List<List<Position>> WINNING_COMBINATIONS = asList(
+      asList(new Position(0, 0), new Position(0, 1), new Position(0, 2)),
+      asList(new Position(1, 0), new Position(1, 1), new Position(1, 2)),
+      asList(new Position(2, 0), new Position(2, 1), new Position(2, 2)),
+      asList(new Position(0, 0), new Position(1, 0), new Position(2, 0)),
+      asList(new Position(0, 1), new Position(1, 1), new Position(2, 1)),
+      asList(new Position(0, 2), new Position(1, 2), new Position(2, 2)),
+      asList(new Position(0, 0), new Position(1, 1), new Position(2, 2)),
+      asList(new Position(0, 2), new Position(1, 1), new Position(2, 0))
+      );
   private static final int SIZE = 3;
   private Board board = new Board();
 
   private Marker lastPlayer = new Marker('\0');
+  List<Position> playerX = new ArrayList<>();
+  List<Position> playerY = new ArrayList<>();
+
 
   public String play(int x, int y) {
+    Position position = new Position(x, y);
     lastPlayer = nextPlayer();
-    setBox(x, y, lastPlayer);
-    return determineResult(new Position(x, y));
+    setBox(position, lastPlayer);
+    return determineResult(position);
   }
 
   private String determineResult(Position position) {
@@ -30,12 +50,22 @@ public class TicTacToe {
     return new Marker('X');
   }
 
-  private void setBox(int x, int y, Marker lastPlayer) {
+  private void setBox(Position position, Marker lastPlayer) {
+    if (lastPlayer.mark == 'X') {
+      playerX.add(position);
+    }else if(lastPlayer.mark == 'O'){
+      playerY.add(position);
+    }
 
-    board.add(x, y, lastPlayer);
+    board.add(position.getX(), position.getY(), lastPlayer);
   }
 
   public boolean isWin(Marker lastPlayer, Position position) {
+
+    // if player X
+    // for each winning combination
+    //   if playerX contains all the list then it has won
+
     int playerTotal = lastPlayer.mark * SIZE;
     int x = position.getX();
     int y = position.getY();
