@@ -55,9 +55,9 @@ public class TicTacToe {
   }
 
   private void setBox(Position position, Marker lastPlayer) {
-    if (lastPlayer.mark == 'X') {
+    if (lastPlayer.equals(new Marker('X'))) {
       playerX.add(position);
-    }else if(lastPlayer.mark == 'O'){
+    }else if(lastPlayer.equals(new Marker('O'))){
       playerO.add(position);
     }
   }
