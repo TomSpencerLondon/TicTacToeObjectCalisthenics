@@ -60,8 +60,6 @@ public class TicTacToe {
     }else if(lastPlayer.mark == 'O'){
       playerO.add(position);
     }
-
-//    board.add(position.getX(), position.getY(), lastPlayer);
   }
 
   public boolean isWin(Marker lastPlayer) {
