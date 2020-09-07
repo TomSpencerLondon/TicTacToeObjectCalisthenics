@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TicTacToe {
+
   private static final List<List<Position>> WINNING_COMBINATIONS = asList(
       asList(new Position(1, 1), new Position(1, 2), new Position(1, 3)),
       asList(new Position(2, 1), new Position(2, 2), new Position(2, 3)),
@@ -17,6 +18,7 @@ public class TicTacToe {
       asList(new Position(1, 3), new Position(2, 2), new Position(3, 1))
       );
   private static final int SIZE = 3;
+  public static final int TOTAL_SQUARES = 9;
   private Board board = new Board();
 
   private Marker lastPlayer = new Marker('\0');
@@ -25,6 +27,8 @@ public class TicTacToe {
 
 
   public String play(int x, int y) {
+    checkAxis(x);
+    checkAxis(y);
     Position position = new Position(x, y);
     lastPlayer = nextPlayer();
     setBox(position, lastPlayer);
@@ -32,7 +36,7 @@ public class TicTacToe {
   }
 
   private String determineResult(Position position) {
-    if (isWin(lastPlayer, position)) {
+    if (isWin(lastPlayer)) {
       return lastPlayer.mark + " is the winner";
     } else if (isDraw()) {
       return "The result is draw";
@@ -58,7 +62,7 @@ public class TicTacToe {
     board.add(position.getX(), position.getY(), lastPlayer);
   }
 
-  public boolean isWin(Marker lastPlayer, Position position) {
+  public boolean isWin(Marker lastPlayer) {
     if (lastPlayer.mark == 'X'){
       return WINNING_COMBINATIONS.stream().anyMatch(playerX::containsAll);
     }else if(lastPlayer.mark == 'O'){
@@ -68,26 +72,13 @@ public class TicTacToe {
     }
   }
 
-  private boolean isWinDiagonal(int playerTotal, char diagonal1) {
-    return diagonal1 == playerTotal;
-  }
-
-  private boolean isWinVertical(int playerTotal, char vertical) {
-    return vertical == playerTotal;
-  }
-
-  private boolean isWinHorizontal(int playerTotal, char horizontal) {
-    return horizontal == playerTotal;
-  }
-
   boolean isDraw() {
-    for (int x = 0; x < SIZE; x++) {
-      for (int y = 0; y < SIZE; y++) {
-        if (board.isEmpty(x, y)) {
-          return false;
-        }
-      }
+    return playerX.size() + playerO.size() == TOTAL_SQUARES;
+  }
+
+  private void checkAxis(int axis) {
+    if (axis < 1 || axis > SIZE) {
+      throw new RuntimeException("X is outside board");
     }
-    return true;
   }
 }

@@ -26,10 +26,6 @@ public class Board {
     return board[x][y].isEmpty();
   }
 
-  public char getMarkAt(Position position){
-    return board[position.getX()][position.getY()].mark;
-  }
-
   private void checkAxis(int axis) {
     if (axis < 0 || axis >= SIZE) {
       throw new RuntimeException("X is outside board");
