@@ -20,7 +20,7 @@ public class TicTacToe {
   private static final int SIZE = 3;
   public static final int TOTAL_SQUARES = 9;
 
-  private Marker lastPlayer = new Marker('\0');
+  private Marker lastPlayer = Marker.EMPTY;
   List<Position> playerX = new ArrayList<>();
   List<Position> playerO = new ArrayList<>();
 
@@ -39,7 +39,7 @@ public class TicTacToe {
 
   private String determineResult(Position position) {
     if (isWin(lastPlayer)) {
-      return lastPlayer.mark + " is the winner";
+      return lastPlayer + " is the winner";
     } else if (isDraw()) {
       return "The result is draw";
     } else {
@@ -48,24 +48,24 @@ public class TicTacToe {
   }
 
   public Marker nextPlayer() {
-    if (lastPlayer.equals(new Marker('X'))) {
-      return new Marker('O');
+    if (lastPlayer == Marker.X) {
+      return Marker.O;
     }
-    return new Marker('X');
+    return Marker.X;
   }
 
   private void setBox(Position position, Marker lastPlayer) {
-    if (lastPlayer.equals(new Marker('X'))) {
+    if (lastPlayer.equals(Marker.X)) {
       playerX.add(position);
-    }else if(lastPlayer.equals(new Marker('O'))){
+    }else if(lastPlayer.equals(Marker.O)){
       playerO.add(position);
     }
   }
 
   public boolean isWin(Marker lastPlayer) {
-    if (lastPlayer.equals(new Marker('X'))){
+    if (lastPlayer == Marker.X){
       return WINNING_COMBINATIONS.stream().anyMatch(playerX::containsAll);
-    }else if(lastPlayer.equals(new Marker('O'))){
+    }else if(lastPlayer ==Marker.O){
       return WINNING_COMBINATIONS.stream().anyMatch(playerO::containsAll);
     }else {
       return false;
