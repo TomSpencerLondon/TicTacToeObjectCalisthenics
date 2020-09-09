@@ -17,8 +17,16 @@ public class Board {
     add(position, player);
   }
 
+  public boolean isWin(List<List<Position>> combinations, Marker player){
+    return combinations.stream().anyMatch(getPositions(player)::containsAll);
+  }
+
+  public List<Position> getPositions(Marker lastPlayer) {
+    return board.get(lastPlayer);
+  }
+
   private boolean isNotEmpty(Position position) {
-    return this.board.get(Marker.X).contains(position) || this.board.get(Marker.O).contains(position);
+    return getPositions(Marker.X).contains(position) || getPositions(Marker.O).contains(position);
   }
 
   private void checkAxis(Position position){
@@ -28,7 +36,7 @@ public class Board {
   }
 
   private void add(Position position, Marker lastPlayer) {
-    board.get(lastPlayer).add(position);
+    getPositions(lastPlayer).add(position);
   }
 
 

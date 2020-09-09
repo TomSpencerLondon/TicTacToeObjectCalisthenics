@@ -22,17 +22,11 @@ public class Decider {
   }
 
   public boolean isWin(Marker lastPlayer) {
-    if (lastPlayer == Marker.X){
-      return WINNING_COMBINATIONS.stream().anyMatch(board.board.get(Marker.X)::containsAll);
-    }else if(lastPlayer ==Marker.O){
-      return WINNING_COMBINATIONS.stream().anyMatch(board.board.get(Marker.O)::containsAll);
-    }else {
-      return false;
-    }
+    return board.isWin(WINNING_COMBINATIONS, lastPlayer);
   }
 
   public boolean isDraw() {
-    return board.board.get(Marker.X).size() + board.board.get(Marker.O).size() == TOTAL_SQUARES;
+    return board.getPositions(Marker.X).size() + board.getPositions(Marker.O).size() == TOTAL_SQUARES;
   }
 
 }
