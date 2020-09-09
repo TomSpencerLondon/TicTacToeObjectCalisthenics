@@ -22,4 +22,8 @@ public class Position {
   public int hashCode() {
     return reflectionHashCode(this);
   }
+
+  public boolean isOutside(int size) {
+    return (this.x < 1 || this.y < 1) || (this.x > size || this.y > size);
+  }
 }

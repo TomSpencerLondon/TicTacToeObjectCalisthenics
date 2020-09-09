@@ -4,6 +4,7 @@ import static java.util.Arrays.asList;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class TicTacToe {
 
@@ -23,17 +24,13 @@ public class TicTacToe {
   private Marker lastPlayer = Marker.EMPTY;
   List<Position> playerX = new ArrayList<>();
   List<Position> playerO = new ArrayList<>();
-
+//  Map<Marker, List<Position>> board = Map.of(Marker.X, playerX, Marker.O,playerO);
+  Board board = new Board();
 
   public String play(int x, int y) {
-    checkAxis(x);
-    checkAxis(y);
-    Position position = new Position(x, y);
     lastPlayer = nextPlayer();
-    if (playerX.contains(position) || playerO.contains(position)){
-      throw new RuntimeException("Box is occupied");
-    }
-    setBox(position, lastPlayer);
+    Position position = new Position(x, y);
+    board.move(position, lastPlayer);
     return determineResult(position);
   }
 
@@ -54,31 +51,17 @@ public class TicTacToe {
     return Marker.X;
   }
 
-  private void setBox(Position position, Marker lastPlayer) {
-    if (lastPlayer.equals(Marker.X)) {
-      playerX.add(position);
-    }else if(lastPlayer.equals(Marker.O)){
-      playerO.add(position);
-    }
-  }
-
   public boolean isWin(Marker lastPlayer) {
     if (lastPlayer == Marker.X){
-      return WINNING_COMBINATIONS.stream().anyMatch(playerX::containsAll);
+      return WINNING_COMBINATIONS.stream().anyMatch(board.board.get(Marker.X)::containsAll);
     }else if(lastPlayer ==Marker.O){
-      return WINNING_COMBINATIONS.stream().anyMatch(playerO::containsAll);
+      return WINNING_COMBINATIONS.stream().anyMatch(board.board.get(Marker.O)::containsAll);
     }else {
       return false;
     }
   }
 
   boolean isDraw() {
-    return playerX.size() + playerO.size() == TOTAL_SQUARES;
-  }
-
-  private void checkAxis(int axis) {
-    if (axis < 1 || axis > SIZE) {
-      throw new RuntimeException("X is outside board");
-    }
+    return board.board.get(Marker.X).size() + board.board.get(Marker.O).size() == TOTAL_SQUARES;
   }
 }

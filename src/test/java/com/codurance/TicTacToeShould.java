@@ -19,14 +19,14 @@ public class TicTacToeShould {
   void not_allow_x_to_be_outside_of_the_board() {
     assertThatThrownBy(() -> ticTacToe.play(5, 2))
         .isInstanceOf(RuntimeException.class)
-        .hasMessage("X is outside board");
+        .hasMessage("Outside board");
   }
 
   @Test
   void not_allow_y_to_be_outside_of_the_board() {
     assertThatThrownBy(() -> ticTacToe.play(2, 5))
         .isInstanceOf(RuntimeException.class)
-        .hasMessage("X is outside board");
+        .hasMessage("Outside board");
   }
 
   @Test
