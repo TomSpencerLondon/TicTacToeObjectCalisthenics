@@ -7,7 +7,10 @@ import java.util.Map;
 public class Board {
   private static final int SIZE = 3;
 
-  public Map<Marker, List<Position>> board = Map.of(Marker.X, new ArrayList<>(), Marker.O,new ArrayList<>());
+  public Map<Marker, List<Position>> board = Map.of(
+      Marker.X, new ArrayList<>(),
+      Marker.O,new ArrayList<>()
+  );
 
   public void move(Position position, Marker player){
     checkAxis(position);
@@ -38,6 +41,4 @@ public class Board {
   private void add(Position position, Marker lastPlayer) {
     getPositions(lastPlayer).add(position);
   }
-
-
 }
