@@ -30,4 +30,6 @@ public class Board {
   private void add(Position position, Marker lastPlayer) {
     board.get(lastPlayer).add(position);
   }
+
+
 }
