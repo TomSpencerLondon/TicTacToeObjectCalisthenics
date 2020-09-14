@@ -1,17 +1,19 @@
 package com.codurance;
 
 public class Minimax {
-  public void play(TicTacToeMinimax ticTacToeMinimax){
-    while(("No winner").equals(ticTacToeMinimax.determineResult())){
-      ticTacToeMinimax.playerMove();
-      if (!("No winner").equals(ticTacToeMinimax.determineResult())){
+  public void play(Game game){
+    while(game.getScore().getValue0() == 0){
+      game.playerMove(Square.O);
+      game.show();
+      if (game.getScore().getValue0() != 0){
         break;
       }
-      computerMove();
+      computerMove(game);
+      game.show();
     }
   }
 
-  private void computerMove() {
-
+  private void computerMove(Game game) {
+    game.playerMove(Square.X);
   }
 }
